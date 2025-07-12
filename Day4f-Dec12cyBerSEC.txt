@@ -561,15 +561,21 @@ www.sti.edu.ph:      vs     www.dlsu.edu.ph:
 @EDGE:
 config t
 no access-list 8
-access-list 8 permit any
+access-list 8 permit host 192.168.103.21
+access-list 8 permit host 192.168.103.22
 Int Gi 3
  ip nat Inside
 Int gi 1
  ip nat Outside
-IP Nat inside source static tcp 192.168.103.21 80 208.8.8.101 8080
-IP Nat inside source static tcp 192.168.103.21 22 208.8.8.101 8443
-IP Nat inside source static tcp 192.168.103.22 80 208.8.8.102 8080
-IP Nat inside source static tcp 192.168.103.22 22 208.8.8.102 8443
+IP Nat inside source static tcp 192.168.103.21 80 208.8.8.121 80
+IP Nat inside source static tcp 192.168.103.21 80 208.8.8.121 8080
+IP Nat inside source static tcp 192.168.103.21 443 208.8.8.121 443
+IP Nat inside source static tcp 192.168.103.21 443 208.8.8.121 8443
+!for www.surebet22.com
+IP Nat inside source static tcp 192.168.103.22 80 208.8.8.122 80
+IP Nat inside source static tcp 192.168.103.22 80 208.8.8.122 8080
+IP Nat inside source static tcp 192.168.103.22 443 208.8.8.122 443
+IP Nat inside source static tcp 192.168.103.22 443 208.8.8.122 8443
 IP nat inside source list 8 int gi 1 Overload
 end
 show ip nat translation
